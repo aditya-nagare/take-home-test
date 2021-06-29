@@ -8,12 +8,12 @@ import (
 	"github.com/gorilla/mux"
 )
 
-//Handler impliments methods in handler
+//Handler implements methods in handler
 type Handler interface {
 	GetUserEmail(http.ResponseWriter, *http.Request)
 }
 
-//HandlerImplementation returns depedacies for handler
+//HandlerImplementation returns dependencies for handler
 type HandlerImplementation struct {
 	serverURL string
 }
