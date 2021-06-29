@@ -34,6 +34,8 @@ func (handler HandlerImplementation) GetUserEmail(w http.ResponseWriter, r *http
 	vars := mux.Vars(r)
 	userID := vars["ID"]
 
+	log.Logger(ctx).Info("user email request for userID:", userID)
+
 	userEmail, err := getUserEmail(ctx, handler.serverURL, userID)
 	if nil != err {
 		log.Logger(ctx).Error(err)
@@ -42,6 +44,8 @@ func (handler HandlerImplementation) GetUserEmail(w http.ResponseWriter, r *http
 	}
 	var getUserEmailResp models.Response
 	getUserEmailResp.Email = userEmail.Data.Email
+
+	defer log.Logger(ctx).Info("get user email response sent to user")
 
 	RespondWithJSON(w, http.StatusOK, getUserEmailResp)
 }

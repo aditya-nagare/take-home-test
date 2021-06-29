@@ -32,13 +32,15 @@ func RespondWithError(w http.ResponseWriter, code int) {
 
 func getUserEmail(ctx context.Context, serverURL, userID string) (userEmail *models.ReqData, err error) {
 
-	log.Logger(ctx).Info("get user email helper")
+	log.Logger(ctx).Info("get user email request initiated")
 
 	resp, err := http.Get(serverURL + userID)
 	if nil != err {
 		log.Logger(ctx).Error(err)
 		return nil, err
 	}
+
+	log.Logger(ctx).Info("get user email response received")
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if nil != err {
